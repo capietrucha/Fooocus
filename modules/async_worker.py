@@ -130,7 +130,7 @@ def worker():
         base_model_name = args.pop()
         refiner_model_name = args.pop()
         refiner_switch = args.pop()
-        loras = [[str(args.pop()), float(args.pop())] for _ in range(5)]
+        loras = [[str(args.pop()), float(args.pop())] for _ in range(10)]
         input_image_checkbox = args.pop()
         current_tab = args.pop()
         uov_method = args.pop()
@@ -146,6 +146,7 @@ def worker():
             cn_weight = args.pop()
             cn_type = args.pop()
             if cn_img is not None:
+                print (cn_img ,cn_stop, cn_weight,cn_type)
                 cn_tasks[cn_type].append([cn_img, cn_stop, cn_weight])
 
         outpaint_selections = [o.lower() for o in outpaint_selections]
