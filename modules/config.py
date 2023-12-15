@@ -294,7 +294,7 @@ available_aspect_ratios = get_config_item_or_set_default(
         '896*1152', '896*1088', '960*1088', '960*1024', '1024*1024', '1024*960',
         '1088*960', '1088*896', '1152*896', '1152*832', '1216*832', '1280*768',
         '1344*768', '1344*704', '1408*704', '1472*704', '1536*640', '1600*640',
-        '1664*576', '1728*576'
+        '1664*576', '1728*576', '512*512', '256*256'
     ],
     validator=lambda x: isinstance(x, list) and all('*' in v for v in x) and len(x) > 1
 )
@@ -333,7 +333,7 @@ example_inpaint_prompts = get_config_item_or_set_default(
 
 example_inpaint_prompts = [[x] for x in example_inpaint_prompts]
 
-config_dict["default_loras"] = default_loras = default_loras[:5] + [['None', 1.0] for _ in range(5 - len(default_loras))]
+config_dict["default_loras"] = default_loras = default_loras[:10] + [['None', 1.0] for _ in range(10 - len(default_loras))]
 
 possible_preset_keys = [
     "default_model",
