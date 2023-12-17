@@ -286,6 +286,10 @@ with shared.gradio_root:
                     lambda: None, _js='()=>{refresh_style_localization();}')
 
             with gr.Tab(label='Model'):
+                
+                with gr.Row():
+                    model_refresh = gr.Button(label='Refresh', value='\U0001f504 Refresh All Files', variant='secondary', elem_classes='refresh_button')
+                    
                 with gr.Group():
                     with gr.Row():
                         base_model = gr.Dropdown(label='Base Model (SDXL only)', choices=modules.config.model_filenames, value=modules.config.default_base_model_name, show_label=True)
@@ -313,8 +317,7 @@ with shared.gradio_root:
                                                     elem_classes='lora_weight')
                             lora_ctrls += [lora_model, lora_weight]
 
-                with gr.Row():
-                    model_refresh = gr.Button(label='Refresh', value='\U0001f504 Refresh All Files', variant='secondary', elem_classes='refresh_button')
+                
             with gr.Tab(label='Advanced'):
                 guidance_scale = gr.Slider(label='Guidance Scale', minimum=1.0, maximum=30.0, step=0.01,
                                            value=modules.config.default_cfg_scale,
