@@ -217,19 +217,21 @@ with shared.gradio_root:
 
         with gr.Column(scale=1, visible=modules.config.default_advanced_checkbox) as advanced_column:
             with gr.Tab(label='Setting'):
-                performance_selection = gr.Radio(label='Performance',
-                                                 choices=modules.flags.performance_selections,
-                                                 value=modules.config.default_performance)
-                aspect_ratios_selection = gr.Radio(label='Aspect Ratios', choices=modules.config.available_aspect_ratios,
-                                                   value=modules.config.default_aspect_ratio, info='width × height',
-                                                   elem_classes='aspect_ratios')
-                image_number = gr.Slider(label='Image Number', minimum=1, maximum=32, step=1, value=modules.config.default_image_number)
                 negative_prompt = gr.Textbox(label='Negative Prompt', show_label=True, placeholder="Type prompt here.",
                                              info='Describing what you do not want to see.', lines=2,
                                              elem_id='negative_prompt',
                                              value=modules.config.default_prompt_negative)
                 seed_random = gr.Checkbox(label='Random', value=True)
                 image_seed = gr.Textbox(label='Seed', value=0, max_lines=1, visible=False) # workaround for https://github.com/gradio-app/gradio/issues/5354
+                image_number = gr.Slider(label='Image Number', minimum=1, maximum=32, step=1, value=modules.config.default_image_number)
+                performance_selection = gr.Radio(label='Performance',
+                                                 choices=modules.flags.performance_selections,
+                                                 value=modules.config.default_performance)
+                aspect_ratios_selection = gr.Radio(label='Aspect Ratios', choices=modules.config.available_aspect_ratios,
+                                                   value=modules.config.default_aspect_ratio, info='width × height',
+                                                   elem_classes='aspect_ratios')
+
+                
 
                 def random_checked(r):
                     return gr.update(visible=not r)
@@ -449,7 +451,7 @@ with shared.gradio_root:
                     modules.config.update_all_model_names()
                     results = []
                     results += [gr.update(choices=modules.config.model_filenames), gr.update(choices=['None'] + modules.config.model_filenames)]
-                    for i in range(5):
+                    for i in range(10):
                         results += [gr.update(choices=['None'] + modules.config.lora_filenames), gr.update()]
                     return results
 
