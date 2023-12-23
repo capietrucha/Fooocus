@@ -235,9 +235,6 @@ default_scheduler = get_config_item_or_set_default(
 default_styles = get_config_item_or_set_default(
     key='default_styles',
     default_value=[
-        "Fooocus V2",
-        "Fooocus Enhance",
-        "Fooocus Sharp"
     ],
     validator=lambda x: isinstance(x, list) and all(y in modules.sdxl_styles.legal_style_names for y in x)
 )
@@ -291,16 +288,16 @@ available_aspect_ratios = get_config_item_or_set_default(
     key='available_aspect_ratios',
     default_value=[
         '704*1408', '704*1344', '768*1344', '768*1280', '832*1216', '832*1152',
-        '896*1152', '896*1088', '960*1088', '960*1024', '1024*1024', '1024*960',
+        '896*1152', '896*1088', '960*1088', '960*1024', '1024*1024', '512*512', '256*256', '1024*960',
         '1088*960', '1088*896', '1152*896', '1152*832', '1216*832', '1280*768',
         '1344*768', '1344*704', '1408*704', '1472*704', '1536*640', '1600*640',
-        '1664*576', '1728*576'
+        '1664*576', '1728*576', '512*768', '768*512', '2160*1440', '1080*720'
     ],
     validator=lambda x: isinstance(x, list) and all('*' in v for v in x) and len(x) > 1
 )
 default_aspect_ratio = get_config_item_or_set_default(
     key='default_aspect_ratio',
-    default_value='1152*896' if '1152*896' in available_aspect_ratios else available_aspect_ratios[0],
+    default_value='512*512' if '512*512' in available_aspect_ratios else available_aspect_ratios[0],
     validator=lambda x: x in available_aspect_ratios
 )
 default_inpaint_engine_version = get_config_item_or_set_default(
@@ -333,7 +330,7 @@ example_inpaint_prompts = get_config_item_or_set_default(
 
 example_inpaint_prompts = [[x] for x in example_inpaint_prompts]
 
-config_dict["default_loras"] = default_loras = default_loras[:5] + [['None', 1.0] for _ in range(5 - len(default_loras))]
+config_dict["default_loras"] = default_loras = default_loras[:10] + [['None', 1.0] for _ in range(10 - len(default_loras))]
 
 possible_preset_keys = [
     "default_model",

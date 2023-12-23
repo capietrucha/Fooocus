@@ -130,7 +130,7 @@ def worker():
         base_model_name = args.pop()
         refiner_model_name = args.pop()
         refiner_switch = args.pop()
-        loras = [[str(args.pop()), float(args.pop())] for _ in range(5)]
+        loras = [[str(args.pop()), float(args.pop())] for _ in range(10)]
         input_image_checkbox = args.pop()
         current_tab = args.pop()
         uov_method = args.pop()
@@ -146,6 +146,7 @@ def worker():
             cn_weight = args.pop()
             cn_type = args.pop()
             if cn_img is not None:
+                print (cn_img ,cn_stop, cn_weight,cn_type)
                 cn_tasks[cn_type].append([cn_img, cn_stop, cn_weight])
 
         outpaint_selections = [o.lower() for o in outpaint_selections]
@@ -165,7 +166,7 @@ def worker():
             print(f'Refiner disabled because base model and refiner are same.')
             refiner_model_name = 'None'
 
-        assert performance_selection in ['Speed', 'Quality', 'Extreme Speed']
+        assert performance_selection in ['Speed', 'Quality', 'Extreme Quality', 'Insane Quality', 'Batshit Insane Quality', 'Extreme Speed']
 
         steps = 30
 
@@ -174,6 +175,15 @@ def worker():
 
         if performance_selection == 'Quality':
             steps = 60
+            
+        if performance_selection == 'Extreme Quality':
+            steps = 90
+        
+        if performance_selection == 'Insane Quality':
+            steps = 120
+            
+        if performance_selection == 'Batshit Insane Quality':
+            steps = 150
 
         if performance_selection == 'Extreme Speed':
             print('Enter LCM mode.')
@@ -262,7 +272,16 @@ def worker():
 
                         if performance_selection == 'Quality':
                             steps = 36
-
+                        
+                        if performance_selection == 'Extreme Quality':
+                            steps = 54
+                        
+                        if performance_selection == 'Insane Quality':
+                            steps = 72
+                        
+                        if performance_selection == 'Batshit Insane Quality':
+                            steps = 90
+                            
                         if performance_selection == 'Extreme Speed':
                             steps = 8
 
